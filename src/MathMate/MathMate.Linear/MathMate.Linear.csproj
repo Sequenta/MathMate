@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Equation.cs" />
+    <Compile Include="EquationPair.cs" />
     <Compile Include="Extensions\DenseMatrixExtensions.cs" />
     <Compile Include="ISolutionMethod.cs" />
     <Compile Include="ISolver.cs" />

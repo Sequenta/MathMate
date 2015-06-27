@@ -54,6 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EquationPairTests.cs" />
+    <Compile Include="EquationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverTests.cs" />
   </ItemGroup>
