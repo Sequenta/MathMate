@@ -13,13 +13,17 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <button class="btn btn-default">Push me!</button>
-            <textarea rows="5" spellcheck="false" cols="5" ng-model="vm.linearSystem" ng-change="vm.updateSystem()"></textarea>
+            <textarea class="form-control" rows="5" spellcheck="false" cols="5" ng-model="vm.linearSystem" ng-change="vm.updateSystem()"></textarea>
+            <button class="btn btn-default" ng-click="vm.solve()">Solve it!</button>
         </div>
         <div class="col-md-6">
             <div id="linearSystem">
                 \begin{cases}
                 \end{cases}
+            </div>
+            <div id="solution">
+                \begin{pmatrix}
+                \end{pmatrix}
             </div>
         </div>
     </div>
