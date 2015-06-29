@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMate.Linear", "MathMate.Linear\MathMate.Linear.csproj", "{7A5B1274-A368-4384-87E9-E87A551C7E0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMate.Linear.Tests", "MathMate.Linear.Tests\MathMate.Linear.Tests.csproj", "{2121B3C3-E4BF-4C18-874B-A961E02BCC70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMate.Web", "MathMate.Web\MathMate.Web.csproj", "{AB8DAA34-BEFB-455F-8512-235D4CD02B74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A5B1274-A368-4384-87E9-E87A551C7E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5B1274-A368-4384-87E9-E87A551C7E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5B1274-A368-4384-87E9-E87A551C7E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5B1274-A368-4384-87E9-E87A551C7E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2121B3C3-E4BF-4C18-874B-A961E02BCC70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2121B3C3-E4BF-4C18-874B-A961E02BCC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2121B3C3-E4BF-4C18-874B-A961E02BCC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2121B3C3-E4BF-4C18-874B-A961E02BCC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8DAA34-BEFB-455F-8512-235D4CD02B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8DAA34-BEFB-455F-8512-235D4CD02B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8DAA34-BEFB-455F-8512-235D4CD02B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8DAA34-BEFB-455F-8512-235D4CD02B74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
