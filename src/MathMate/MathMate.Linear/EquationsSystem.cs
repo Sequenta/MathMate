@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace MathMate.Linear
@@ -14,11 +16,22 @@ namespace MathMate.Linear
 
         public DenseMatrix GetMatrix()
         {
+            var rows = new List<double[]>();
             foreach (var equation in equations)
             {
-                
+                rows.Add(equation.EquationPairs.Select(x => x.Constant).ToArray());
             }
-            return null;
+
+            var matrix = DenseMatrix.OfRowArrays(rows);
+
+            return matrix;
+        }
+
+        public Vector<double> GetResultsVector()
+        {
+            var constants = equations.Select(x => x.Result.Constant).ToArray();
+            var resultsVector = Vector.Build.Dense(constants);
+            return resultsVector;
         }
     }
 }
