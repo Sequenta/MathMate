@@ -1,26 +1,21 @@
 using MathMate.Linear.Extensions;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace MathMate.Linear
 {
-    public class Solver : ISolver
+    public class Solver : ILinearEquationSystemSolver
     {
         private ISolutionMethod strategy;
 
-        public Vector<double> Solve(DenseMatrix systemMatrix, Vector<double> freeTerms)
+        public Vector<double> Solve(EquationsSystem system)
         {
+            var systemMatrix = system.GetMatrix();
+            var freeTerms = system.GetFreeTermsVector();
             if (systemMatrix.IsSquare())
             {
                 strategy = new MatrixMethod();
             }
             return strategy.Solve(systemMatrix,freeTerms);
-        }
-        public Vector<double> Solve(DenseMatrix systemMatrix)
-        {
-            var freeTerms = systemMatrix.ExtractFreeTerms();
-            systemMatrix = DenseMatrix.OfMatrix(systemMatrix.RemoveColumn(systemMatrix.ColumnCount-1));
-            return Solve(systemMatrix, freeTerms);
         }
     }
 }

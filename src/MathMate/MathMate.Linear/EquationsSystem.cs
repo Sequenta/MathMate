@@ -27,11 +27,11 @@ namespace MathMate.Linear
             return matrix;
         }
 
-        public Vector<double> GetResultsVector()
+        public Vector<double> GetFreeTermsVector()
         {
             var constants = equations.Select(x => x.Result.Constant).ToArray();
-            var resultsVector = Vector.Build.Dense(constants);
-            return resultsVector;
+            var freeTerms = Vector.Build.Dense(constants);
+            return freeTerms;
         }
     }
 }

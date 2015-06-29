@@ -40,7 +40,7 @@ namespace MathMate.Linear.Tests
             var equationsSystem = new EquationsSystem(equations);
             var expectedVector = Vector.Build.Dense(new double[] {2, 7, 1});
 
-            var resultsVector = equationsSystem.GetResultsVector();
+            var resultsVector = equationsSystem.GetFreeTermsVector();
 
             Assert.Equal(expectedVector,resultsVector);
         }

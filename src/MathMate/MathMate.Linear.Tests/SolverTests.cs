@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace MathMate.Linear.Tests
@@ -6,36 +7,21 @@ namespace MathMate.Linear.Tests
     public class SolverTests
     {
         [Fact]
-        public void SolveWithFreeTermsReturnsCorrectResult()
+        public void SolveReturnsCorrectResult()
         {
-            var matrix = DenseMatrix.OfArray(new double[,] {
-        	    {3,2,-1},
-        	    {2,-1,5},
-                {1,7,-1}
-		    });
-            var freeTerms = Vector.Build.Dense(new double[] { 4, 23, 5 });
+            var equations = new List<Equation>
+            {
+                new Equation("x+3y-2z=5"),
+                new Equation("3x+5y+6z=7"),
+                new Equation("2x+4y+3z=8")
+            };
+            var equationsSystem = new EquationsSystem(equations);
             var solver = new Solver();
+            var expectedResult = Vector.Build.Dense(new double[] {-15, 8, 2});
 
-            var actual = solver.Solve(matrix, freeTerms);
-            var expected = Vector.Build.Dense(new double[] { 2, 1, 4 });
+            var result = solver.Solve(equationsSystem);
 
-            Assert.Equal(expected,actual);
-        }
-
-        [Fact]
-        public void SolveWithoutFreeTermsReturnsCorrectResult()
-        {
-            var matrix = DenseMatrix.OfArray(new double[,] {
-        	    {3,2,-1,4},
-        	    {2,-1,5,23},
-                {1,7,-1,5}
-		    });
-            var solver = new Solver();
-
-            var actual = solver.Solve(matrix);
-            var expected = Vector.Build.Dense(new double[] { 2, 1, 4 });
-
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedResult.ToString(), result.ToString());
         }
     }
 }

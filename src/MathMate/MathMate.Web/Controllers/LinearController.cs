@@ -1,22 +1,21 @@
 ﻿using System.Web.Mvc;
-using MathMate.Linear;
+using MathMate.Web.Forms.Handlers;
 
 namespace MathMate.Web.Controllers
 {
     public class LinearController : Controller
     {
-        private readonly ISolver solver;
+        private readonly LinearSystemFormHandler formHandler;
 
-        public LinearController(ISolver solver)
+        public LinearController(LinearSystemFormHandler formHandler)
         {
-            this.solver = solver;
+            this.formHandler = formHandler;
         }
 
         public ActionResult Solve(string[] equations)
         {
-            //var result = solver.Solve(null);
-
-            return Json(equations);
+            var result = formHandler.Handle(equations);
+            return Json(result);
         }
     }
 }
