@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -43,6 +44,44 @@ namespace MathMate.Linear
             })).Trim('+');
             var result = Result.ToString();
             return string.Format("{0}={1}", pairs, result);
+        }
+
+        public Equation Simplify()
+        {
+            if (IsSimplified())
+            {
+                return this;
+            }
+
+            var equationPairs = new List<EquationPair>
+            {
+                Result
+            };
+            equationPairs.AddRange(EquationPairs);
+
+            var resultConstant = equationPairs.Where(x => string.IsNullOrEmpty(x.Coefficient)).Sum(x => x.Constant);
+            var result = new EquationPair(resultConstant, string.Empty);
+            var simplifiedEquationPairs = new List<EquationPair>();
+            foreach (var equationPair in equationPairs.Where(x => !string.IsNullOrEmpty(x.Coefficient)))
+            {
+                var coefficient = equationPair.Coefficient;
+                if (simplifiedEquationPairs.Any(x => x.Coefficient == coefficient)) 
+                    continue;
+                var constant = equationPairs.Where(x => x.Coefficient == coefficient).Sum(x => x.Constant);
+                simplifiedEquationPairs.Add(new EquationPair(constant, coefficient));
+            }
+            return new Equation(simplifiedEquationPairs, result);
+        }
+
+        public bool IsSimplified()
+        {
+            var equationPairs = new List<EquationPair>
+            {
+                Result
+            };
+            equationPairs.AddRange(EquationPairs);
+
+            return equationPairs.GroupBy(x => x.Coefficient).All(x => x.Count() == 1);
         }
     }
 }
