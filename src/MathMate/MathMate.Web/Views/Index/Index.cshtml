@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-6">
             <textarea class="form-control" rows="5" spellcheck="false" cols="5" ng-model="vm.linearSystem" ng-change="vm.updateSystem()"></textarea>
-            <button class="btn btn-default" ng-click="vm.solve()">Solve it!</button>
+            <button class="btn btn-default" ng-disabled="vm.linearSystem != ''" ng-click="vm.solve()">Solve it!</button>
         </div>
         <div class="col-md-6">
             System

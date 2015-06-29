@@ -15,6 +15,10 @@ namespace MathMate.Web.Forms.Handlers
 
         protected override IFormResult<Vector<double>> InnerValidate(string[] form)
         {
+            if (form == null)
+            {
+                return FormResult<Vector<double>>.ErrorResult("System can not be empty!");
+            }
             return FormResult<Vector<double>>.SuccessResult(null);
         }
 
