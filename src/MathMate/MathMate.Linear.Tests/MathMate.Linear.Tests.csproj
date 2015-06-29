@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EquationPairTests.cs" />
+    <Compile Include="EquationsSystemTests.cs" />
     <Compile Include="EquationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverTests.cs" />

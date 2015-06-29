@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Equation.cs" />
     <Compile Include="EquationPair.cs" />
+    <Compile Include="EquationsSystem.cs" />
     <Compile Include="Extensions\DenseMatrixExtensions.cs" />
     <Compile Include="ISolutionMethod.cs" />
     <Compile Include="ISolver.cs" />
