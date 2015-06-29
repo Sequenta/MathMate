@@ -27,8 +27,10 @@ namespace MathMate.Linear
         public static Equation Parse(string equationString)
         {
             equationString = equationString.Replace(" ", "");
-            var result = Regex.Match(equationString, @"(?<==)-?\d+").Value;
-            var pairs = Regex.Matches(equationString, @"-?\d+[a-zA-Z]|-?[a-zA-Z]").Cast<Match>().Select(x => EquationPair.Parse(x.Value));
+            var match = Regex.Match(equationString, @"([^=]*)=([^=]*)");
+            var equationPairs = match.Groups[1].Value;
+            var result = match.Groups[2].Value;
+            var pairs = Regex.Matches(equationPairs, @"-?\d+[a-zA-Z]|-?[a-zA-Z]|-?\d+").Cast<Match>().Select(x => EquationPair.Parse(x.Value));
             return new Equation(pairs, EquationPair.Parse(result));
         }
 
@@ -52,15 +54,12 @@ namespace MathMate.Linear
             {
                 return this;
             }
-
-            var equationPairs = new List<EquationPair>
-            {
-                Result
-            };
+            var equationPairs = new List<EquationPair>();
             equationPairs.AddRange(EquationPairs);
+            equationPairs.Add(new EquationPair(-Result.Constant,Result.Coefficient));
 
             var resultConstant = equationPairs.Where(x => string.IsNullOrEmpty(x.Coefficient)).Sum(x => x.Constant);
-            var result = new EquationPair(resultConstant, string.Empty);
+            var result = new EquationPair(-resultConstant, string.Empty);
             var simplifiedEquationPairs = new List<EquationPair>();
             foreach (var equationPair in equationPairs.Where(x => !string.IsNullOrEmpty(x.Coefficient)))
             {
@@ -81,7 +80,8 @@ namespace MathMate.Linear
             };
             equationPairs.AddRange(EquationPairs);
 
-            return equationPairs.GroupBy(x => x.Coefficient).All(x => x.Count() == 1);
+            return equationPairs.GroupBy(x => x.Coefficient).All(x => x.Count() == 1) &&
+                   string.IsNullOrEmpty(Result.Coefficient);
         }
     }
 }

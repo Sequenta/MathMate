@@ -5,13 +5,14 @@ namespace MathMate.Linear.Tests
 {
     public class EquationTests
     {
-        [Fact]
-        public void ToStringTest()
+        [Theory]
+        [InlineData("3x+y-2z-1x+2y=1")]
+        [InlineData("3x+y-2-1x+2y-2z=1")]
+        public void ToStringTest(string equation)
         {
-            var equationString = "3x+4y-2z=1";
-            var parsedEquation = Equation.Parse(equationString);
+            var parsedEquation = Equation.Parse(equation);
 
-            Assert.Equal(equationString, parsedEquation.ToString());
+            Assert.Equal(equation, parsedEquation.ToString());
         }
 
         [Fact]
@@ -38,15 +39,18 @@ namespace MathMate.Linear.Tests
             Assert.Equal("1", parsedEquation.Result.ToString());
         }
 
-        [Fact]
-        public void SimplifyReturnsEquationWithFeverEquationPairs()
+        [Theory]
+        [InlineData("3x+y-2z-1x+2y=1", "2x+3y-2z=1")]
+        [InlineData("3x+y=2z", "3x+y-2z=0")]
+        [InlineData("3x+y-2-1x+2y-2z=1", "2x+3y-2z=3")]
+        [InlineData("3x+y-1x+1x+2y-2z=3", "3x+3y-2z=3")]
+        public void SimplifyReturnsEquationWithFeverEquationPairs(string equation, string result)
         {
-            var equationString = "3x+y-2z-1x+2y=1";
-            var parsedEquation = Equation.Parse(equationString);
+            var parsedEquation = Equation.Parse(equation);
 
             var simplifiedEquation = parsedEquation.Simplify();
 
-            Assert.Equal("2x+3y-2z=1", simplifiedEquation.ToString());
+            Assert.Equal(result, simplifiedEquation.ToString());
         }
     }
 }

@@ -23,5 +23,23 @@ namespace MathMate.Linear.Tests
 
             Assert.Equal(expectedResult.ToString(), result.ToString());
         }
+
+        [Fact]
+        public void SolveSimplifiesSystemAndReturnsCorrectResult()
+        {
+            var equations = new List<Equation>
+            {
+                new Equation("x+2y+1y-2z-1=4"),
+                new Equation("x+2x+5y+6z+2=9"),
+                new Equation("2x+4y+3z=8")
+            };
+            var equationsSystem = new EquationsSystem(equations);
+            var solver = new Solver();
+            var expectedResult = Vector.Build.Dense(new double[] { -15, 8, 2 });
+
+            var result = solver.Solve(equationsSystem);
+
+            Assert.Equal(expectedResult.ToString(), result.ToString());
+        }
     }
 }
