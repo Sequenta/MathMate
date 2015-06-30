@@ -36,7 +36,7 @@ namespace MathMate.Linear.Tests
             Assert.Equal("y", pairs[1].ToString());
             Assert.Equal("-2z", pairs[2].ToString());
 
-            Assert.Equal("1", parsedEquation.Result.ToString());
+            Assert.Equal("1", parsedEquation.Result.First().ToString());
         }
 
         [Theory]
@@ -44,6 +44,8 @@ namespace MathMate.Linear.Tests
         [InlineData("3x+y=2z", "3x+y-2z=0")]
         [InlineData("3x+y-2-1x+2y-2z=1", "2x+3y-2z=3")]
         [InlineData("3x+y-1x+1x+2y-2z=3", "3x+3y-2z=3")]
+        [InlineData("2x=3-y", "2x+y=3")]
+        [InlineData("y=4", "y=4")]
         public void SimplifyReturnsEquationWithFeverEquationPairs(string equation, string result)
         {
             var parsedEquation = Equation.Parse(equation);

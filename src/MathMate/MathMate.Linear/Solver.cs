@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using MathMate.Linear.Extensions;
 using MathNet.Numerics.LinearAlgebra;
