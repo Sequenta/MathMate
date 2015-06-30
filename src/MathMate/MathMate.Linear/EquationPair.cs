@@ -25,8 +25,21 @@ namespace MathMate.Linear
         {
             var coefficientString = Regex.Match(equationPair, @"-?[a-zA-Z]").Value;
             var constantString = Regex.Match(equationPair, @"-?\d+").Value;
-            var constant = string.IsNullOrEmpty(constantString) ? 1 : double.Parse(constantString);
-            return new EquationPair(constant,coefficientString);
+            double constant;
+            if (string.IsNullOrEmpty(constantString))
+            {
+                constant = coefficientString.Contains("-") ? -1 : 1;
+            }
+            else
+            {
+                constant = double.Parse(constantString);
+            }
+            return new EquationPair(constant,coefficientString.Replace("-",""));
+        }
+
+        public EquationPair Inverse()
+        {
+            return new EquationPair(-Constant,Coefficient);
         }
 
         public override string ToString()
