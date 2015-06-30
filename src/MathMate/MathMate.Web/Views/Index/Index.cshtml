@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="col-md-4 col-md-offset-4 centered">
-                        <textarea placeholder="Enter your system here..." class="form-control" rows="5" spellcheck="false" cols="5" ng-model="vm.linearSystem" ng-change="vm.updateSystem()" style="resize: none;"></textarea>
-                        <button class="btn btn-default" ng-disabled="vm.linearSystem == ''" ng-click="vm.solve()">Solve it!</button>
+                        <textarea placeholder="Enter your system here..." class="form-control" rows="5" spellcheck="false" cols="5" ng-model="vm.linearSystem" ng-change="vm.updateSystem()" ng-disabled="vm.isprocessing" style="resize: none;"></textarea>
+                        <button class="btn btn-default" ng-disabled="vm.linearSystem == '' || vm.isProcessing" ng-click="vm.solve()">Solve it!</button>
                     </div>
                 </div>
                 <div class="col-md-6 centered">
