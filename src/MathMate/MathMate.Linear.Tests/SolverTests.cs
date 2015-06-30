@@ -43,7 +43,7 @@ namespace MathMate.Linear.Tests
         }
 
         [Fact]
-        public void SolveForSimpleEquationSystemReturnsCorrectResult()
+        public void SolveByCramersMethodReturnsCorrectResult()
         {
             var equations = new List<Equation>
             {

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CramersMethod.cs" />
     <Compile Include="Equation.cs" />
     <Compile Include="EquationPair.cs" />
     <Compile Include="EquationsSystem.cs" />
