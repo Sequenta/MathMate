@@ -7,10 +7,10 @@ namespace MathMate.Linear
 {
     public class Equation
     {
-        public EquationPair Result { get; private set; }
+        public IEnumerable<EquationPair> Result { get; private set; }
         public IEnumerable<EquationPair> EquationPairs { get; private set; }
 
-        public Equation(IEnumerable<EquationPair> equationPairs, EquationPair result)
+        public Equation(IEnumerable<EquationPair> equationPairs, IEnumerable<EquationPair> result)
         {
             EquationPairs = equationPairs;
             Result = result;
@@ -31,7 +31,8 @@ namespace MathMate.Linear
             var equationPairs = match.Groups[1].Value;
             var result = match.Groups[2].Value;
             var pairs = Regex.Matches(equationPairs, @"-?\d+[a-zA-Z]|-?[a-zA-Z]|-?\d+").Cast<Match>().Select(x => EquationPair.Parse(x.Value));
-            return new Equation(pairs, EquationPair.Parse(result));
+            var results = Regex.Matches(result, @"-?\d+[a-zA-Z]|-?[a-zA-Z]|-?\d+").Cast<Match>().Select(x => EquationPair.Parse(x.Value));
+            return new Equation(pairs, results);
         }
 
         public override string ToString()
@@ -44,7 +45,7 @@ namespace MathMate.Linear
                 }
                 return x.ToString();
             })).Trim('+');
-            var result = Result.ToString();
+            var result = string.Join("",Result.Select(x => x.ToString()));
             return string.Format("{0}={1}", pairs, result);
         }
 
@@ -54,12 +55,16 @@ namespace MathMate.Linear
             {
                 return this;
             }
+
             var equationPairs = new List<EquationPair>();
             equationPairs.AddRange(EquationPairs);
-            equationPairs.Add(new EquationPair(-Result.Constant,Result.Coefficient));
+            equationPairs.AddRange(Result.Select(x => x.Inverse()));
 
             var resultConstant = equationPairs.Where(x => string.IsNullOrEmpty(x.Coefficient)).Sum(x => x.Constant);
-            var result = new EquationPair(-resultConstant, string.Empty);
+            var result = new List<EquationPair>
+            {
+                new EquationPair(-resultConstant, string.Empty)
+            }; 
             var simplifiedEquationPairs = new List<EquationPair>();
             foreach (var equationPair in equationPairs.Where(x => !string.IsNullOrEmpty(x.Coefficient)))
             {
@@ -74,14 +79,8 @@ namespace MathMate.Linear
 
         public bool IsSimplified()
         {
-            var equationPairs = new List<EquationPair>
-            {
-                Result
-            };
-            equationPairs.AddRange(EquationPairs);
-
-            return equationPairs.GroupBy(x => x.Coefficient).All(x => x.Count() == 1) &&
-                   string.IsNullOrEmpty(Result.Coefficient);
+            return (Result.Count() == 1 && string.IsNullOrEmpty(Result.First().Coefficient)) &&
+                   (EquationPairs.GroupBy(x => x.Coefficient).All(x => x.Count() == 1));
         }
     }
 }

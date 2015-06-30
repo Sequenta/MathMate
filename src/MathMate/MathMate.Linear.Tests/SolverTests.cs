@@ -41,5 +41,22 @@ namespace MathMate.Linear.Tests
 
             Assert.Equal(expectedResult.ToString(), result.ToString());
         }
+
+        [Fact]
+        public void SolveByCramersMethodReturnsCorrectResult()
+        {
+            var equations = new List<Equation>
+            {
+                new Equation("2x+y=3"),
+                new Equation("y=4")
+            };
+            var equationsSystem = new EquationsSystem(equations);
+            var solver = new Solver();
+            var expectedResult = Vector.Build.Dense(new[] { -0.5, 4 });
+
+            var result = solver.Solve(equationsSystem);
+
+            Assert.Equal(expectedResult.ToString(), result.ToString());
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using MathMate.Linear.Extensions;
 using MathNet.Numerics.LinearAlgebra;
@@ -16,7 +15,15 @@ namespace MathMate.Linear
             var freeTerms = simplifiedSystem.GetFreeTermsVector();
             if (systemMatrix.IsSquare())
             {
-                strategy = new MatrixMethod();
+                if (systemMatrix.RowCount<3)
+                {
+                    strategy = new CramersMethod();
+                }
+                else
+                {
+                    strategy = new MatrixMethod();
+                }
+                
             }
             return strategy.Solve(systemMatrix,freeTerms);
         }

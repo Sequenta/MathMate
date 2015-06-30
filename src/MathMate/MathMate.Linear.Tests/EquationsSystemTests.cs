@@ -29,7 +29,27 @@ namespace MathMate.Linear.Tests
         }
 
         [Fact]
-        public void GetResultsVectorReturnsVectorsOfResultsForEachEquation()
+        public void GetMatrixReturnsDenseMatrixOfExpectedSizeIfCoefficientsMissing()
+        {
+            var equations = new List<Equation>
+            {
+                new Equation("2x+y=3"),
+                new Equation("y=4")
+            };
+            var equationsSystem = new EquationsSystem(equations);
+            var expectedMatrix = DenseMatrix.OfArray(new double[,]
+            {
+                {2,1},
+                {0,1}
+            });
+
+            var equationMatrix = equationsSystem.GetMatrix();
+
+            Assert.Equal(expectedMatrix, equationMatrix);
+        }
+
+        [Fact]
+        public void GetResultsVectorReturnsFreeTermsVectorForSystem()
         {
             var equations = new List<Equation>
             {
