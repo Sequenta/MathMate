@@ -4,13 +4,16 @@ namespace MathMate.Linear.Tests
 {
     public class EquationPairTests
     {
-        [Fact]
-        public void ParseTest()
+        [Theory]
+        [InlineData("-3x","x",-3)]
+        [InlineData("-x","x",-1)]
+        [InlineData("3","",3)]
+        public void ParseTest(string equationPair, string coefficient, double constant)
         {
-            var equationPair = EquationPair.Parse("-3x");
+            var result = EquationPair.Parse(equationPair);
 
-            Assert.Equal("x",equationPair.Coefficient);
-            Assert.Equal(-3, equationPair.Constant);
+            Assert.Equal(coefficient,result.Coefficient);
+            Assert.Equal(constant, result.Constant);
         }
 
         [Fact]
