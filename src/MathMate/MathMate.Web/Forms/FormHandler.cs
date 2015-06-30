@@ -1,4 +1,6 @@
-﻿namespace MathMate.Web.Forms
+﻿using System;
+
+namespace MathMate.Web.Forms
 {
     public abstract class FormHandler<TForm, TResult> : IFormHandler<TForm, TResult> where TForm : class where TResult : class
     {
@@ -20,9 +22,9 @@
             {
                 result = InnerHandle(form);
             }
-            catch
+            catch(Exception e)
             {
-                result = FormResult<TResult>.ErrorResult();
+                result = FormResult<TResult>.ErrorResult(e.Message);
             }
             return result;
         }

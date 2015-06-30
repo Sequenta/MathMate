@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MathMate.Linear;
 using MathNet.Numerics.LinearAlgebra;
 
@@ -24,9 +25,17 @@ namespace MathMate.Web.Forms.Handlers
 
         protected override IFormResult<Vector<double>> InnerHandle(string[] form)
         {
-            var equations = form.Select(Equation.Parse);
-            var equationSystem = new EquationsSystem(equations);
-            var result = solver.Solve(equationSystem);
+            Vector<double> result;
+            try
+            {
+                var equations = form.Select(Equation.Parse);
+                var equationSystem = new EquationsSystem(equations);
+                result = solver.Solve(equationSystem);
+            }
+            catch (Exception e)
+            {
+                return FormResult<Vector<double>>.ErrorResult(e.Message);
+            }
 
             return FormResult<Vector<double>>.SuccessResult(result);
         }

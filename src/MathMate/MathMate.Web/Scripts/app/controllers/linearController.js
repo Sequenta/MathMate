@@ -47,13 +47,17 @@
             vm.isProcessing = true;
             $http.post('/Linear/Solve', { equations: vm.linearSystem.split(/\r|\r\n|\n/) })
                  .success(function (data) {
-                    var solution = formatSolution(data.Data);
-                    var result = formatInput('\\begin{pmatrix}', solution , '\\end{pmatrix}');
-                    MathJax.Hub.Queue(["Text", vm.solution, result]);
+                    if (data.IsError) {
+                        alert(data.Comment);
+                    } else {
+                        var solution = formatSolution(data.Data);
+                        var result = formatInput('\\begin{pmatrix}', solution, '\\end{pmatrix}');
+                        MathJax.Hub.Queue(["Text", vm.solution, result]);
+                    }
                     vm.isProcessing = false;
                 })
                  .error(function (data) {
-                     alert(data.Comment);
+                     alert(data);
                      vm.isProcessing = false;
                   });
         }

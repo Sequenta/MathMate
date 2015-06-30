@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using MathMate.Linear.Exceptions;
 
 namespace MathMate.Linear
 {
@@ -28,6 +28,10 @@ namespace MathMate.Linear
         {
             equationString = equationString.Replace(" ", "");
             var match = Regex.Match(equationString, @"([^=]*)=([^=]*)");
+            if (match.Groups.Count != 3)
+            {
+                throw new ParsingException("One of equations has invalid format!");
+            }
             var equationPairs = match.Groups[1].Value;
             var result = match.Groups[2].Value;
             var pairs = Regex.Matches(equationPairs, @"-?\d+[a-zA-Z]|-?[a-zA-Z]|-?\d+").Cast<Match>().Select(x => EquationPair.Parse(x.Value));

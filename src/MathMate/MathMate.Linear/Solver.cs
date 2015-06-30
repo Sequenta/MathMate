@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using MathMate.Linear.Exceptions;
 using MathMate.Linear.Extensions;
 using MathNet.Numerics.LinearAlgebra;
 
@@ -25,7 +27,16 @@ namespace MathMate.Linear
                 }
                 
             }
-            return strategy.Solve(systemMatrix,freeTerms);
+            Vector<double> result;
+            try
+            {
+                result = strategy.Solve(systemMatrix,freeTerms);
+            }
+            catch (Exception)
+            {
+                throw new SolverEsception("Unsupported type of equation system!");
+            }
+            return result;
         }
 
         private EquationsSystem Simplify(EquationsSystem system)

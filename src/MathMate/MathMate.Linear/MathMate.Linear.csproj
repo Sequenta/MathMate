@@ -47,6 +47,8 @@
     <Compile Include="Equation.cs" />
     <Compile Include="EquationPair.cs" />
     <Compile Include="EquationsSystem.cs" />
+    <Compile Include="Exceptions\ParsingException.cs" />
+    <Compile Include="Exceptions\SolverEsception.cs" />
     <Compile Include="Extensions\DenseMatrixExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="ISolutionMethod.cs" />
